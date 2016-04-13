@@ -1,14 +1,14 @@
 class RankingsController < ApplicationController 
     def index
         if params[:ranking_type].to_s == "average"
-        ranking = Ranking.where("search_date >= ? AND search_date <= ?", params[:sdate], params[:sdate])
-        @rankings = ranking.paginate(:page => params[:page], :per_page => 20)
+        ranking = Ranking.select("search_date, avg(google) as google, avg(yahoo) as yahoo, avg(bing) as bing").where("search_date >= ? AND search_date <= ?", params[:sdate], params[:sdate]).group("search_date");
+        @rankings = ranking.paginate(:page => params[:page], :per_page => 30)
         elsif params[:ranking_type].to_s == "weighted"
-        ranking = Ranking.where("search_date >= ? AND search_date <= ?", params[:sdate], params[:sdate])
+        ranking = Ranking.select("search_date, avg(global_monthly_searches) avg_global, max(global_monthly_searches) as max_global, avg(google) as google, avg(yahoo) as yahoo, avg(bing) as bing").where("search_date >= ? AND search_date <= ?", params[:sdate], params[:sdate]).group("search_date");
         @rankings = ranking.paginate(:page => params[:page], :per_page => 30)
         else
         ranking = Ranking.where("search_date >= ? AND search_date <= ?", params[:sdate], params[:sdate])
-        @rankings = ranking.paginate(:page => params[:page], :per_page => 10)
+        @rankings = ranking.paginate(:page => params[:page], :per_page => 30)
         end
         response do |format|
            format.html

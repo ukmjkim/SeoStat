@@ -73,6 +73,41 @@
     <%= link_to "CSV", rankings_path(format: "csv") %> |
     <%= link_to "Excel", rankings_path(format: "xls") %>
             </div>
+<% if params[:ranking_type] == "average" %>
+<table id="rankings">
+    <tr>
+        <td>Date</td>
+        <td>Google</td>
+        <td>Yahoo</td>
+        <td>Bing</td>
+    </tr>
+    <% @rankings.each do |ranking| %>
+    <tr>
+        <td><%= ranking.search_date %></td>
+        <td><%= ranking.google %></td>
+        <td><%= ranking.yahoo %></td>
+        <td><%= ranking.bing %></td>
+    </tr>
+    <% end %>
+</table>
+<% elsif params[:ranking_type] == "weighted" %>
+<table id="rankings">
+    <tr>
+        <td>Date</td>
+        <td>Google</td>
+        <td>Yahoo</td>
+        <td>Bing</td>
+    </tr>
+    <% @rankings.each do |ranking| %>
+    <tr>
+        <td><%= ranking.search_date %></td>
+        <td><%= ranking.google * ranking.avg_global / ranking.max_global.round(4) %></td>
+        <td><%= ranking.yahoo * ranking.avg_global / ranking.max_global.round(4) %></td>
+        <td><%= ranking.bing * ranking.avg_global / ranking.max_global.round(4) %></td>
+    </tr>
+    <% end %>
+</table>
+<% else %>
 <table id="rankings">
     <tr>
         <td>Date</td>
@@ -94,7 +129,7 @@
         <td>CDC</td>
         <td>Tags</td>
     </tr>
-<% @rankings.each do |ranking| %>
+    <% @rankings.each do |ranking| %>
     <tr>
         <td><%= ranking.search_date %></td>
         <td><%= ranking.search_site %></td>
@@ -115,6 +150,7 @@
         <td><%= ranking.cdc %></td>
         <td><%= ranking.tags %></td>
     </tr>
+    <% end %>
 <% end %>
 </table>
 <%= will_paginate @rankings %>

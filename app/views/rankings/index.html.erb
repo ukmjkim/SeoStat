@@ -34,29 +34,32 @@
       <div class="well">
         <table border="0" width="100%">
           <tr>
+            <td width="200"><div class="control-group"><label class="control-label"><b>Search Date</b></lable></div></td>
+            <td><div id="txt" class="control-group">
+<%= text_field "ranking", "sdate", "size" => 10, "value" => params[:edate].to_s if params[:sdate] %> ~
+<%= text_field "ranking", "edate", "size" => 10, "value" => params[:edate].to_s if params[:edate] %>
+            </td>
+          <tr>
+          <tr>
             <td width="200"><div class="control-group"><label class="control-label"><b>Search Type</b></lable></div></td>
             <td><div id="txt" class="control-group">
-<p>
 <%= radio_button_tag 'ranking_type', 'raw', !!(params[:ranking_type].to_s == "raw") %> Raw
 <%= radio_button_tag 'ranking_type', 'average', !!(params[:ranking_type].to_s == "average") %> Average
 <%= radio_button_tag 'ranking_type', 'weighted', !!(params[:ranking_type].to_s == "weighted") %> Weighted
+            </td>
+          <tr>
+        </table>
 <script >
     $(function(){
         $("input[name=ranking_type]").change(function(){
+            var sdate = document.getElementById("ranking_sdate").value;
+            var edate = document.getElementById("ranking_edate").value;
             var root_path = "<%= root_path %>"
-            var url = root_path + "?ranking_type=" + $(this).val();
+            var url = root_path + "?ranking_type=" + $(this).val() + "&sdate=" + sdate + "&edate=" + edate;
             window.location.replace(url);
         });
     });
 </script>
-            </td>
-            <td><div id="txt" class="control-group">
-    Download:
-    <%= link_to "CSV", rankings_path(format: "csv") %> |
-    <%= link_to "Excel", rankings_path(format: "xls") %>
-            </td>
-          <tr>
-        </table>
       </div>
     </div>
   </div>
@@ -65,6 +68,11 @@
 
 <div class="container-fluid">
   <div class="CSSTableGenerator">
+            <div id="txt" class="control-group">
+    Download:
+    <%= link_to "CSV", rankings_path(format: "csv") %> |
+    <%= link_to "Excel", rankings_path(format: "xls") %>
+            </div>
 <table id="rankings">
     <tr>
         <td>Date</td>
@@ -109,7 +117,7 @@
     </tr>
 <% end %>
 </table>
-<%= will_paginate @users %>
+<%= will_paginate @rankings %>
   </div>
 </div>
 

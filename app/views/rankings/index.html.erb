@@ -51,11 +51,25 @@
         </table>
 <script >
     $(function(){
-        $("input[name=ranking_type]").change(function(){
+        function getUrl() {
             var sdate = document.getElementById("ranking_sdate").value;
             var edate = document.getElementById("ranking_edate").value;
+            var search_type = $("input[name=ranking_type]:checked").val();
             var root_path = "<%= root_path %>"
-            var url = root_path + "?ranking_type=" + $(this).val() + "&sdate=" + sdate + "&edate=" + edate;
+            var url = root_path + "?ranking_type=" + search_type + "&sdate=" + sdate + "&edate=" + edate;
+            return url;
+        }
+
+        $("input[id=ranking_sdate]").change(function(){
+            var url = getUrl();
+            window.location.replace(url);
+        });
+        $("input[id=ranking_edate]").change(function(){
+            var url = getUrl();
+            window.location.replace(url);
+        });
+        $("input[name=ranking_type]").click(function(){
+            var url = getUrl();
             window.location.replace(url);
         });
     });

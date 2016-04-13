@@ -1,0 +1,4 @@
+Date,Site,Keyword,Market,Location,Device,Google,Google Bank Rank,Yahoo,Bing,Google Url,Yahoo Url,Bing Url,Advertiser Competition,Global Monthly Searches,Regional Monthly Searches,CDC,Tags
+<% @rankings.each do |ranking| %>
+<%= ranking.search_date %>,<%= ranking.search_site %>,<%= ranking.search_keyword %>,<%= ranking.search_market %>,<%= ranking.search_location %>,<%= ranking.search_device %>,<%= ranking.google %>,<%= ranking.google_base_rank %>,<%= ranking.yahoo %>,<%= ranking.bing %>,<%= ranking.google_url %>,<%= ranking.yahoo_url %>,<%= ranking.bing_url %>,<%= ranking.advertiser_competition %>,<%= ranking.global_monthly_searches %>,<%= ranking.regional_monthly_searches %>,<%= ranking.cdc %>,<%= ranking.tags %>
+<% end %>

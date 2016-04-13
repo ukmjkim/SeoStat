@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+        <Cell><Data ss:Type="String">Site</Data></Cell>
+        <Cell><Data ss:Type="String">Keyword</Data></Cell>
+        <Cell><Data ss:Type="String">Market</Data></Cell>
+        <Cell><Data ss:Type="String">Location</Data></Cell>
+        <Cell><Data ss:Type="String">Device</Data></Cell>
+        <Cell><Data ss:Type="String">Google</Data></Cell>
+        <Cell><Data ss:Type="String">Google Bank Rank</Data></Cell>
+        <Cell><Data ss:Type="String">Yahoo</Data></Cell>
+        <Cell><Data ss:Type="String">Bing</Data></Cell>
+        <Cell><Data ss:Type="String">Google Url</Data></Cell>
+        <Cell><Data ss:Type="String">Yahoo Url</Data></Cell>
+        <Cell><Data ss:Type="String">Bing Url</Data></Cell>
+        <Cell><Data ss:Type="String">Advertiser Competition</Data></Cell>
+        <Cell><Data ss:Type="String">Global Monthly Searches</Data></Cell>
+        <Cell><Data ss:Type="String">Regional Monthly Searches</Data></Cell>
+        <Cell><Data ss:Type="String">CDC</Data></Cell>
+        <Cell><Data ss:Type="String">Tags</Data></Cell>
+      </Row>
+    <% @rankings.each do |ranking| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= ranking.search_date %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.search_site %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.search_keyword %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.search_market %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.search_location %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.search_device %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.google %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.google_base_rank %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.yahoo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.bing %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.google_url %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.yahoo_url %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.bing_url %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.advertiser_competition %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.global_monthly_searches %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.regional_monthly_searches %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.cdc %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ranking.tags %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

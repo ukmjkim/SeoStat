@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  search_date: 
+  search_site: 
+  search_keyword: 
+  search_market: 
+  search_location: 
+  search_device: 
+  google: 
+  google_base_rank: 
+  yahoo: 
+  bing: 
+  google_url: 
+  yahoo_url: 
+  bing_url: 
+  advertiser_competition: 
+  global_monthly_searches: 
+  regional_monthly_searches: 
+  cdc: 
+  tags: MyString
+
+two:
+  search_date: 
+  search_site: 
+  search_keyword: 
+  search_market: 
+  search_location: 
+  search_device: 
+  google: 
+  google_base_rank: 
+  yahoo: 
+  bing: 
+  google_url: 
+  yahoo_url: 
+  bing_url: 
+  advertiser_competition: 
+  global_monthly_searches: 
+  regional_monthly_searches: 
+  cdc: 
+  tags: MyString

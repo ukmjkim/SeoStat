@@ -1,0 +1,117 @@
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div id="brand" class="brand">Search Ranking</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="well">
+        <table border="0" width="100%">
+          <tr>
+            <td width="200"><div class="control-group"><label class="control-label"><b>Import Ranking CSV File</b></lable></div></td>
+            </td>
+            <td><div id="txt" class="control-group">
+<%= form_tag import_rankings_path, multipart:true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
+            </td>
+          <tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="well">
+        <table border="0" width="100%">
+          <tr>
+            <td width="200"><div class="control-group"><label class="control-label"><b>Search Type</b></lable></div></td>
+            <td><div id="txt" class="control-group">
+<p>
+<%= radio_button_tag 'ranking_type', 'raw', !!(params[:ranking_type].to_s == "raw") %> Raw
+<%= radio_button_tag 'ranking_type', 'average', !!(params[:ranking_type].to_s == "average") %> Average
+<%= radio_button_tag 'ranking_type', 'weighted', !!(params[:ranking_type].to_s == "weighted") %> Weighted
+<script >
+    $(function(){
+        $("input[name=ranking_type]").change(function(){
+            var root_path = "<%= root_path %>"
+            var url = root_path + "?ranking_type=" + $(this).val();
+            window.location.replace(url);
+        });
+    });
+</script>
+            </td>
+            <td><div id="txt" class="control-group">
+    Download:
+    <%= link_to "CSV", rankings_path(format: "csv") %> |
+    <%= link_to "Excel", rankings_path(format: "xls") %>
+            </td>
+          <tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="CSSTableGenerator">
+<table id="rankings">
+    <tr>
+        <td>Date</td>
+        <td>Site</td>
+        <td>Keyword</td>
+        <td>Market</td>
+        <td>Location</td>
+        <td>Device</td>
+        <td>Google</td>
+        <td>Google Bank Rank</td>
+        <td>Yahoo</td>
+        <td>Bing</td>
+        <td>Google Url</td>
+        <td>Yahoo Url</td>
+        <td>Bing Url</td>
+        <td>Advertiser Competition</td>
+        <td>Global Monthly Searches</td>
+        <td>Regional Monthly Searches</td>
+        <td>CDC</td>
+        <td>Tags</td>
+    </tr>
+<% @rankings.each do |ranking| %>
+    <tr>
+        <td><%= ranking.search_date %></td>
+        <td><%= ranking.search_site %></td>
+        <td><%= ranking.search_keyword %></td>
+        <td><%= ranking.search_market %></td>
+        <td><%= ranking.search_location %></td>
+        <td><%= ranking.search_device %></td>
+        <td><%= ranking.google %></td>
+        <td><%= ranking.google_base_rank %></td>
+        <td><%= ranking.yahoo %></td>
+        <td><%= ranking.bing %></td>
+        <td><%= ranking.google_url %></td>
+        <td><%= ranking.yahoo_url %></td>
+        <td><%= ranking.bing_url %></td>
+        <td><%= ranking.advertiser_competition %></td>
+        <td><%= ranking.global_monthly_searches %></td>
+        <td><%= ranking.regional_monthly_searches %></td>
+        <td><%= ranking.cdc %></td>
+        <td><%= ranking.tags %></td>
+    </tr>
+<% end %>
+</table>
+<%= will_paginate @users %>
+  </div>
+</div>
+
+
+

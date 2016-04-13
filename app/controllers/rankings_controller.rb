@@ -1,5 +1,9 @@
 class RankingsController < ApplicationController 
     def index
+        if !(params[:sdate]) then params[:sdate] = "2016-02-01" end
+        if !(params[:edate]) then params[:edate] = "2016-02-01" end
+        if !(params[:ranking_type]) then params[:ranking_type] = "raw" end
+
         if params[:ranking_type].to_s == "average"
         ranking = Ranking.select("search_date, avg(google) as google, avg(yahoo) as yahoo, avg(bing) as bing").where("search_date >= ? AND search_date <= ?", params[:sdate], params[:sdate]).group("search_date");
         @rankings = ranking.paginate(:page => params[:page], :per_page => 30)

@@ -1,0 +1,17 @@
+<table id="rankings">
+    <tr>
+        <td>Date</td>
+        <td>Google</td>
+        <td>Yahoo</td>
+        <td>Bing</td>
+    </tr>
+    <% @rankings.each do |ranking| %>
+    <tr>
+        <td><%= ranking.search_date %></td>
+        <td><%= ranking.google %></td>
+        <td><%= ranking.yahoo %></td>
+        <td><%= ranking.bing %></td>
+    </tr>
+    <% end %>
+</table>
+

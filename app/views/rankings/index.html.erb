@@ -36,8 +36,8 @@
           <tr>
             <td width="200"><div class="control-group"><label class="control-label"><b>Search Date</b></lable></div></td>
             <td><div id="txt" class="control-group">
-<%= text_field "ranking", "sdate", "size" => 10, "value" => params[:edate].to_s if params[:sdate] %> ~
-<%= text_field "ranking", "edate", "size" => 10, "value" => params[:edate].to_s if params[:edate] %>
+<%= text_field "ranking", "sdate", "size" => 10, "value" => params[:sdate].to_s %> ~
+<%= text_field "ranking", "edate", "size" => 10, "value" => params[:edate].to_s %>
             </td>
           <tr>
           <tr>
@@ -68,92 +68,23 @@
 
 <div class="container-fluid">
   <div class="CSSTableGenerator">
-            <div id="txt" class="control-group">
+    <div id="txt" class="control-group">
     Download:
     <%= link_to "CSV", rankings_path(format: "csv") %> |
     <%= link_to "Excel", rankings_path(format: "xls") %>
-            </div>
-<% if params[:ranking_type] == "average" %>
-<table id="rankings">
-    <tr>
-        <td>Date</td>
-        <td>Google</td>
-        <td>Yahoo</td>
-        <td>Bing</td>
-    </tr>
-    <% @rankings.each do |ranking| %>
-    <tr>
-        <td><%= ranking.search_date %></td>
-        <td><%= ranking.google %></td>
-        <td><%= ranking.yahoo %></td>
-        <td><%= ranking.bing %></td>
-    </tr>
+    </div>
+    <div id="txt" class="control-group">
+    <% if params[:ranking_type] == "average" %>
+        <%= render "rankings/search_average" %>
+    <% elsif params[:ranking_type] == "weighted" %>
+        <%= render "rankings/search_weighted" %>
+    <% else %>
+        <%= render "rankings/search_raw" %>
     <% end %>
-</table>
-<% elsif params[:ranking_type] == "weighted" %>
-<table id="rankings">
-    <tr>
-        <td>Date</td>
-        <td>Google</td>
-        <td>Yahoo</td>
-        <td>Bing</td>
-    </tr>
-    <% @rankings.each do |ranking| %>
-    <tr>
-        <td><%= ranking.search_date %></td>
-        <td><%= ranking.google * ranking.avg_global / ranking.max_global.round(4) %></td>
-        <td><%= ranking.yahoo * ranking.avg_global / ranking.max_global.round(4) %></td>
-        <td><%= ranking.bing * ranking.avg_global / ranking.max_global.round(4) %></td>
-    </tr>
-    <% end %>
-</table>
-<% else %>
-<table id="rankings">
-    <tr>
-        <td>Date</td>
-        <td>Site</td>
-        <td>Keyword</td>
-        <td>Market</td>
-        <td>Location</td>
-        <td>Device</td>
-        <td>Google</td>
-        <td>Google Bank Rank</td>
-        <td>Yahoo</td>
-        <td>Bing</td>
-        <td>Google Url</td>
-        <td>Yahoo Url</td>
-        <td>Bing Url</td>
-        <td>Advertiser Competition</td>
-        <td>Global Monthly Searches</td>
-        <td>Regional Monthly Searches</td>
-        <td>CDC</td>
-        <td>Tags</td>
-    </tr>
-    <% @rankings.each do |ranking| %>
-    <tr>
-        <td><%= ranking.search_date %></td>
-        <td><%= ranking.search_site %></td>
-        <td><%= ranking.search_keyword %></td>
-        <td><%= ranking.search_market %></td>
-        <td><%= ranking.search_location %></td>
-        <td><%= ranking.search_device %></td>
-        <td><%= ranking.google %></td>
-        <td><%= ranking.google_base_rank %></td>
-        <td><%= ranking.yahoo %></td>
-        <td><%= ranking.bing %></td>
-        <td><%= ranking.google_url %></td>
-        <td><%= ranking.yahoo_url %></td>
-        <td><%= ranking.bing_url %></td>
-        <td><%= ranking.advertiser_competition %></td>
-        <td><%= ranking.global_monthly_searches %></td>
-        <td><%= ranking.regional_monthly_searches %></td>
-        <td><%= ranking.cdc %></td>
-        <td><%= ranking.tags %></td>
-    </tr>
-    <% end %>
-<% end %>
-</table>
-<%= will_paginate @rankings %>
+    </div>
+    <div id="txt" class="control-group">
+        <%= will_paginate @rankings %>
+    </div>
   </div>
 </div>
 

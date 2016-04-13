@@ -1,0 +1,16 @@
+<table id="rankings">
+    <tr>
+        <td>Date</td>
+        <td>Google</td>
+        <td>Yahoo</td>
+        <td>Bing</td>
+    </tr>
+    <% @rankings.each do |ranking| %>
+    <tr>
+        <td><%= ranking.search_date %></td>
+        <td><%= (ranking.google * ranking.avg_global / ranking.max_global).round(4) %></td>
+        <td><%= (ranking.yahoo * ranking.avg_global / ranking.max_global).round(4) %></td>
+        <td><%= (ranking.bing * ranking.avg_global / ranking.max_global).round(4) %></td>
+    </tr>
+    <% end %>
+</table>
